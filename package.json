@@ -1,0 +1,25 @@
+{
+  "name": "searchmissingnumbers",
+  "version": "1.0.0",
+  "description": "Дана последовательность чисел от 1 до 10 ... или 10 миллиардов. Числа отсортированы по возрастанию (1, 2, 3 и т.д.). В этой последовательности отсутствуют 2 числа - мы знаем длину и границы последовательности, мы знаем - в последовательности отсутствуют 2 числа, но не знаем - какие именно числа отсутствуют.  ## Tasks : 1. Нужно найти отсутствующие числа оптимальным способом. например если отсутствуют 2 и 3 последовательность будет выглядеть следующим образом 1, 4, 5, 6 ... 10.000.000.000 2. Нужно оценить вычислительную сложность решения.",
+  "homepage": "https://github.com/CodeVisionEvgen/searchMissingNumbers#readme",
+  "bugs": {
+    "url": "https://github.com/CodeVisionEvgen/searchMissingNumbers/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeVisionEvgen/searchMissingNumbers.git"
+  },
+  "license": "ISC",
+  "author": "codevisionevgen",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "start": "node ./dist"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}
