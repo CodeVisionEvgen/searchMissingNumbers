@@ -4,9 +4,9 @@
 /**
  * Функция находит отсутствующие числа в масиве чисел
  * @param {number[]} numbers 
- * @returns {number}
+ * @returns {number[]}
  */
-function searchMissingNumbers(numbers: number[]):number[] {
+export function searchMissingNumbers(numbers: number[]):number[] {
   // Проверка данных
   if (!Array.isArray(numbers) || numbers.length <= 1) return [];
 
@@ -60,41 +60,46 @@ const getRandomIndex = (length:number):number => Math.floor(Math.random() * leng
  * Параметр size * 1000
  * удаляет 2 неизвестных числа с результата масива
  * @param {number} size 
- * @returns {number[]}
+ * @returns {{array:number[];deleted:number[]}}
  */
-function getBigNumbers(size:number):number[] {
+export function getBigNumbers(size:number):{array:number[];deleted:number[]} {
   const bigSize = size * 1000;
   let array = Array.from({
     length: bigSize
   }, (v, k) => k + 1)
 
-  const savedIndex:number[] = []
-  let i = 2;
-  while (i) {
+  const savedIndex: Set<number> = new Set<number>();
+  const deleted: number[] = []; 
+  let toDelete = 2;
+  while (toDelete) {
     const index = getRandomIndex(bigSize);
 
     /*
      Предотвращает повторные индексы
      Рандомный индекс не может быть меньше 1 или последним индексом масива чисел
     */
-    if (!savedIndex.includes(index) && index > 1 && index <= array.length - 1) {
+    if (!savedIndex.has(index) && index > 1 && index <= array.length - 1) {
 
-      savedIndex.push(index);
+      savedIndex.add(index);
 
+      deleted.push(array[index])
 
-      array = array.slice(0, index - 1).concat(array.slice(index, array.length))
-        --i
+      array.splice(index, 1);
+      
+        --toDelete;
     }
 
   }
 
-  return array
+  return {
+    deleted,
+    array
+  }
 
 }
 
-
 /*
-  998 елементов масива
-  const numbers = getBigNumbers(1);
-  console.log(searchMissingNumbers(numbers));
-  */
+998 елементов масива
+const numbers = getBigNumbers(1);
+console.log(searchMissingNumbers(numbers.array),numbers.deleted);
+*/
